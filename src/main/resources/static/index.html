@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>历史上的今天</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+
+<div class="container col-md-6 col-md-offset-3 col-sm-6">
+    <ul class="list-group" ng-repeat="item in eventList">
+        <li class="list-group-item">
+            <h4>{{item.title}}</h4><br>
+            <img ng-src="{{item.pic}}" ng-show="item.pic != ''"><br>
+            <span>{{item.lunar}}</span><br>
+            <span>{{item.des}}</span>
+        </li>
+    </ul>
+</div>
+
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.6.4/angular.min.js"></script>
+    <script src="/app.js"></script>
+</body>
+</html>

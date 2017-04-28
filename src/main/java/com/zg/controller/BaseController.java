@@ -5,14 +5,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.zg.HttpUtils;
 import com.zg.vo.ResponseResult;
-import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.WritableResource;
+import com.zg.vo.WxHotArticle;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.ResourceUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -31,20 +26,13 @@ public class BaseController {
     private final String url = "http://api.juheapi.com/japi/toh";
     private final String key = "21700811f5716921964220b9c015296d";
 
-    private JSONArray cachedResult = null;
-
     private final String redisKeyPrefix = "TodayInHistory_";
+
+    private final String wxNewRedisKey = "WxNew";
+
 
     @Resource
     private RedisTemplate<Object,Object> redisTemplate;
-
-    @RequestMapping({"/","/index"})
-    @ResponseBody
-    Object index(){
-        redisTemplate.opsForValue().set("jwtTestKey","Welcome！",1, TimeUnit.MINUTES);
-        return redisTemplate.opsForValue().get("jwtTestKey");
-    }
-
 
     @RequestMapping("/todayInHistory")
     @ResponseBody
@@ -80,6 +68,16 @@ public class BaseController {
             return result;
         }
         return new ResponseResult(resp.get("reason"));
+    }
+
+    @RequestMapping("/wxNew")
+    @ResponseBody
+    Object wxNew() throws IOException {
+        List<WxHotArticle> cachedResult = (List<WxHotArticle>) redisTemplate.opsForValue().get(wxNewRedisKey);
+        if (cachedResult != null){
+            return cachedResult;
+        }
+        return "无数据";
     }
 
     //将map型转为请求参数型
