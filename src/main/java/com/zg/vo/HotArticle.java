@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by guang.zhang on 2017/4/27.
  */
-public class WxHotArticle implements Serializable {
+public class HotArticle implements Serializable {
 
      private String hotword;
      private String title;

@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.zg.HttpUtils;
 import com.zg.vo.ResponseResult;
-import com.zg.vo.WxHotArticle;
+import com.zg.vo.HotArticle;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit;
  * Created by guang.zhang on 2017/4/12.
  */
 @Controller
+@RequestMapping("/list")
 public class BaseController {
 
     private final String url = "http://api.juheapi.com/japi/toh";
@@ -28,7 +29,7 @@ public class BaseController {
 
     private final String redisKeyPrefix = "TodayInHistory_";
 
-    private final String wxNewRedisKey = "WxNew";
+    private final String toutiaoNewsRedisKey = "ToutiaoNews";
 
 
     @Resource
@@ -70,10 +71,10 @@ public class BaseController {
         return new ResponseResult(resp.get("reason"));
     }
 
-    @RequestMapping("/wxNew")
+    @RequestMapping("/hotNews")
     @ResponseBody
-    Object wxNew() throws IOException {
-        List<WxHotArticle> cachedResult = (List<WxHotArticle>) redisTemplate.opsForValue().get(wxNewRedisKey);
+    Object hotNews() throws IOException {
+        List<HotArticle> cachedResult = (List<HotArticle>) redisTemplate.opsForValue().get(toutiaoNewsRedisKey);
         if (cachedResult != null){
             return cachedResult;
         }

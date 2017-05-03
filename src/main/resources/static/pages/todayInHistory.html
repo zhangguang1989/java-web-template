@@ -1,0 +1,9 @@
+<div class="container col-md-6 col-md-offset-3 col-sm-6">
+    <ul class="list-group" ng-repeat="item in eventList">
+        <li class="list-group-item">
+            <p align="center"><strong>{{item.title}}</strong></p>
+            <p align="center"><img ng-src="{{item.pic}}" ng-show="item.pic != ''"></p>
+            <p>    {{item.des}}</p>
+        </li>
+    </ul>
+</div>
