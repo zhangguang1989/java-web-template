@@ -1,0 +1,10 @@
+section .line {
+    margin: 0 15px;
+    padding: 0;
+    overflow: hidden;
+    background-image: -webkit-linear-gradient(top,#ddd,#ddd 60%,transparent 80%);
+    background-size: 100% 2px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    height: 2px;
+}

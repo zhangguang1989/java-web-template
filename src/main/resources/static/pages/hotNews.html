@@ -1,8 +1,7 @@
-<div class="container">
-    <ul class="list-group" ng-repeat="item in eventList">
-        <li class="list-group-item">
-            <p align="center" style="font-size:20px;"><a href="{{item.link}}">{{item.title}}</a></p>
-            <p align="center"><img ng-src="{{item.imgSrc}}"></p>
-        </li>
-    </ul>
-</div>
+<section ng-repeat="item in eventList">
+    <a href="{{item.link}}">
+        <p align="center" style="font-size:30px;">{{item.title}}</p>
+        <p align="center" style="font-size:30px;"><img ng-src="{{item.imgSrc}}"></p>
+    </a>
+    <div class="line"></div>
+</section>
