@@ -3,9 +3,9 @@ package com.zg.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.zg.HttpUtils;
+import com.zg.util.DateUtils;
+import com.zg.util.HttpUtils;
 import com.zg.vo.ResponseResult;
-import com.zg.vo.HotArticle;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +29,7 @@ public class BaseController {
 
     private final String redisKeyPrefix = "TodayInHistory_";
 
-    private final String toutiaoNewsRedisKey = "ToutiaoNews";
+    private final String toutiaoNewsRedisKeyPrefix = "ToutiaoNews_";
 
 
     @Resource
@@ -74,11 +74,8 @@ public class BaseController {
     @RequestMapping("/hotNews")
     @ResponseBody
     Object hotNews() throws IOException {
-        List<HotArticle> cachedResult = (List<HotArticle>) redisTemplate.opsForValue().get(toutiaoNewsRedisKey);
-        if (cachedResult != null){
-            return cachedResult;
-        }
-        return "无数据";
+        String redisKey = toutiaoNewsRedisKeyPrefix + DateUtils.formateToday("yyyyMM");
+        return redisTemplate.opsForHash().values(redisKey);
     }
 
     //将map型转为请求参数型

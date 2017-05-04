@@ -1,4 +1,4 @@
-package com.zg;
+package com.zg.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;

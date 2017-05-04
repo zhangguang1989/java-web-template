@@ -2,6 +2,7 @@ package com.zg.task;
 
 import com.alibaba.fastjson.JSON;
 import com.hankcs.hanlp.HanLP;
+import com.zg.util.DateUtils;
 import com.zg.vo.HotArticle;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -24,18 +25,18 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class CrawlHotNews {
 
-    private final String redisKey = "ToutiaoNews";
+    private final String toutiaoNewsRedisKeyPrefix = "ToutiaoNews_";
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Resource
     private RedisTemplate<Object,Object> redisTemplate;
 
-    //@Scheduled(fixedRate = 1000 * 60 * 10, initialDelay = 1000)
+    @Scheduled(fixedRate = 1000 * 60 * 10, initialDelay = 1000)
     public void crawl() {
         logger.info("start crawl baidu hotword then toutiao news");
-
         try {
+            String redisKey = toutiaoNewsRedisKeyPrefix + DateUtils.formateToday("yyyyMM");
             List<HotArticle> hotArticles = new ArrayList<>();
             Document doc = Jsoup.connect("http://top.baidu.com/buzz?b=1&fr=topindex").get();
             Element table = doc.getElementsByClass("list-table").first();
@@ -66,9 +67,10 @@ public class CrawlHotNews {
 
                 System.out.println(JSON.toJSONString(hotArticle));
                 hotArticles.add(hotArticle);
+                redisTemplate.opsForHash().put(redisKey,hotArticle.getHotword(),hotArticle);
                 Thread.sleep(2000L);
             }
-            redisTemplate.opsForValue().set(redisKey, hotArticles,3 , TimeUnit.DAYS);
+            redisTemplate.expire(redisKey,33,TimeUnit.DAYS);
         } catch (Exception e) {
             e.printStackTrace();
         }
