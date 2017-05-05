@@ -31,6 +31,9 @@ public class BaseController {
 
     private final String toutiaoNewsRedisKeyPrefix = "ToutiaoNews_";
 
+    private final String weixinNewsRedisKeyPrefix = "WeixinNews_";
+
+
 
     @Resource
     private RedisTemplate<Object,Object> redisTemplate;
@@ -75,6 +78,13 @@ public class BaseController {
     @ResponseBody
     Object hotNews() throws IOException {
         String redisKey = toutiaoNewsRedisKeyPrefix + DateUtils.formateToday("yyyyMM");
+        return redisTemplate.opsForHash().values(redisKey);
+    }
+
+    @RequestMapping("/weixinHotNews")
+    @ResponseBody
+    Object weixinHotNews() throws IOException {
+        String redisKey = weixinNewsRedisKeyPrefix + DateUtils.formateToday("yyyyMMdd");
         return redisTemplate.opsForHash().values(redisKey);
     }
 

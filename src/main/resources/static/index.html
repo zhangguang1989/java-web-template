@@ -5,6 +5,8 @@
     <title>悦读</title>
     <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="/app.css" rel="stylesheet">
+    <meta name="referrer" content="never">
+
 </head>
 <body ng-app="myApp" ng-controller="myCtrl">
 
@@ -12,11 +14,11 @@
 <div ng-include="'pages/header.html'"></div>
 <section ng-view></section>
 
-
     <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="//cdn.bootcss.com/angular.js/1.6.4/angular.min.js"></script>
     <script src="//cdn.bootcss.com/angular.js/1.6.4/angular-route.min.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.4/angular-sanitize.min.js"></script>
     <script src="/app.js"></script>
 </body>
 </html>

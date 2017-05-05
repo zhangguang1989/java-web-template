@@ -1,18 +1,12 @@
 <div class="navbar">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-warning-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a style="font-size:20px;" class="navbar-brand" ng-href="/">首页</a>
+            <a ng-href="/" class="logo"> <img src="https://m.sogou.com/images/logo/2014/new/sogou150x40.png?v=1" width="75"> </a>
         </div>
-        <div class="navbar-collapse collapse navbar-warning-collapse">
-            <ul class="nav navbar-nav">
-                <li ng-class="path =='index' || path =='' ? 'active':''"><a style="font-size:20px;" ng-href="/">热点新闻</a></li>
-                <li ng-class="path =='todayInHistory' ? 'active':''"><a style="font-size:20px;" ng-href="#!/todayInHistory">历史上的今天</a></li>
-            </ul>
+        <div class="navList" style="height: 50px">
+            <a style="font-size:30px;color: black" ng-href="/" ng-class="path =='' ? 'cur':''">热点新闻</a>
+            <a style="font-size:30px;color: black" ng-href="#!/todayInHistory" ng-class="path =='todayInHistory' ? 'cur':''">史上今日</a>
+            <a style="font-size:30px;color: black" ng-href="#!/weixinNews" ng-class="path =='weixinNews' ? 'cur':''">微信热门</a>
         </div>
     </div>
 </div>

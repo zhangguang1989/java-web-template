@@ -8,3 +8,8 @@ section .line {
     background-repeat: no-repeat;
     height: 2px;
 }
+
+.logo{display:block;float:left;position:relative;top:13px;left:6px;width:76px;height:20px}
+.navList{float:right;width:69%;margin-right:6px;padding-right:6px;zoom:1}
+.navList a{display:inline-block;float:left;position:relative;width:30%;height:50px;border-top:2px solid transparent;line-height:50px;color:#333;text-align:center;text-decoration:none}
+.navList .cur{border-top:2px solid #fb6b62;background:#ffece8;font-weight:bold;color:#333}
