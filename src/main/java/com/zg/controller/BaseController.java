@@ -1,12 +1,12 @@
 package com.zg.controller;
 import com.zg.service.TextService;
 import com.zg.util.RandomUtils;
+import com.zg.vo.CompTxtVO;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -20,26 +20,30 @@ public class BaseController {
     @Autowired
     private TextService textService;
 
-    @GetMapping("/compare")
+    @PostMapping("/compTxt")
     @ResponseBody
-    Object compare(@RequestParam String s1, @RequestParam String s2) {
-        return textService.compare(s1,s2);
+    @ApiOperation(value = "计算中文文本相似度")
+    Object compTxt(@RequestBody @Validated CompTxtVO vo) {
+        return textService.compare(vo.getS1(),vo.getS2());
     }
 
-    @GetMapping("/strLen")
+    @PostMapping("/strLen")
     @ResponseBody
-    Object strLen(@RequestParam String s) {
+    @ApiOperation(value = "统计字符串长度")
+    Object strLen(@RequestBody String s) {
         return s.length();
     }
 
     @GetMapping("/port")
     @ResponseBody
+    @ApiOperation(value = "获取随机注册端口")
     Object port() {
         return RandomUtils.randPort();
     }
 
     @GetMapping("/randomStr")
     @ResponseBody
+    @ApiOperation(value = "获取随机字符串")
     Object randomStr(@RequestParam Integer length) {
         return RandomUtils.randStr(length);
     }
