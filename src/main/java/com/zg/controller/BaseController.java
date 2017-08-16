@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Created by guang.zhang on 2017/4/12.
  */
 @Controller
-@RequestMapping("/base")
+@RequestMapping("/")
 public class BaseController {
 
 
@@ -22,14 +22,26 @@ public class BaseController {
 
     @GetMapping("/compare")
     @ResponseBody
-    Object compare(@RequestParam(required = false) String s1, @RequestParam(required = false) String s2) {
-        if (s1 == null) {
-            s1 = "人工智能的变革主要通过低调的机器学习算法，这需要我们给机器大量的实例，让人工智能去学习如何模仿人类的行为";
-        }
-        if (s2 == null) {
-            s2 = "人工智能的变革需要我们给机器大量的实例,主要通过低调的机器学习算法，让人工智能去学习如何模仿人类的行为.如果参数是正零或负零，那么结果是一样的参数.巧妙地打包安装程序。只需下载安装包，随地把它解压缩";
-        }
+    Object compare(@RequestParam String s1, @RequestParam String s2) {
         return textService.compare(s1,s2);
+    }
+
+    @GetMapping("/strLen")
+    @ResponseBody
+    Object strLen(@RequestParam String s) {
+        return s.length();
+    }
+
+    @GetMapping("/port")
+    @ResponseBody
+    Object port() {
+        return RandomUtils.randPort();
+    }
+
+    @GetMapping("/randomStr")
+    @ResponseBody
+    Object randomStr(@RequestParam Integer length) {
+        return RandomUtils.randStr(length);
     }
 
 }

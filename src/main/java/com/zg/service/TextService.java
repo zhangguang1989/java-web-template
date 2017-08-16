@@ -16,7 +16,6 @@ import java.util.Map;
 public class TextService {
 
     private double doCompare(String s1, String s2){
-
         Result result1 = NlpAnalysis.parse(s1);
         Result result2 = NlpAnalysis.parse(s2);
         Map<String,Integer> map1 = new HashMap<>();
@@ -57,7 +56,6 @@ public class TextService {
     }
 
     public double compare(String s1, String s2){
-
         String shortS;
         String longS;
         if (s1.length() < s2.length()){
@@ -67,7 +65,6 @@ public class TextService {
             shortS = s2;
             longS = s1;
         }
-
         double cos1 = doCompare(shortS, longS);
         double cos2 = doCompare(shortS, longS.substring(0,shortS.length()));
         double cos3 = doCompare(shortS, longS.substring(longS.length()-shortS.length(),longS.length()));

@@ -15,7 +15,7 @@ public class RandomUtils {
      * @param length 指定字符串长度
      * @return 一定长度的字符串
      */
-    public static String randomStringCaseSensitive(int length) {
+    public static String randStrCaseSensitive(int length) {
         String base = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         Random random = new Random();
         StringBuffer sb = new StringBuffer();
@@ -26,7 +26,7 @@ public class RandomUtils {
         return sb.toString();
     }
 
-    public static String randomString(int length) {
+    public static String randStr(int length) {
         String base = "0123456789abcdefghijklmnopqrstuvwxyz";
         Random random = new Random();
         StringBuffer sb = new StringBuffer();
@@ -41,7 +41,7 @@ public class RandomUtils {
      * 获取随机的端口，注册端口范围1024到49151
      * @return 端口
      */
-    public static Integer randomPort() {
+    public static Integer randPort() {
         Random random = new Random();
         return random.nextInt(49151 - 1024 + 1) + 1024;
     }

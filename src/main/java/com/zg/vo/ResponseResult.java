@@ -8,13 +8,13 @@ public class ResponseResult implements Serializable {
     private String msg;
     private Object data;
 
-    public ResponseResult(String msg) {
-        this.code = "1";
+    public ResponseResult(String code, String msg) {
+        this.code = code;
         this.msg = msg;
     }
 
     public ResponseResult(Object data) {
-        this.code = "0";
+        this.code = ResponseCode.SUCCESS;
         this.msg = "操作成功";
         this.data = data;
     }
