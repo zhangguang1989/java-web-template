@@ -23,29 +23,34 @@ public class BaseController {
     @PostMapping("/compTxt")
     @ResponseBody
     @ApiOperation(value = "计算中文文本相似度")
-    Object compTxt(@RequestBody @Validated CompTxtVO vo) {
+    public Object compTxt(@RequestBody @Validated CompTxtVO vo) {
         return textService.compare(vo.getS1(),vo.getS2());
     }
 
     @PostMapping("/strLen")
     @ResponseBody
     @ApiOperation(value = "统计字符串长度")
-    Object strLen(@RequestBody String s) {
+    public Object strLen(@RequestBody String s) {
         return s.length();
     }
 
     @GetMapping("/port")
     @ResponseBody
     @ApiOperation(value = "获取随机注册端口")
-    Object port() {
+    public Object port() {
         return RandomUtils.randPort();
     }
 
     @GetMapping("/randomStr")
     @ResponseBody
     @ApiOperation(value = "获取随机字符串")
-    Object randomStr(@RequestParam Integer length) {
+    public Object randomStr(@RequestParam Integer length) {
         return RandomUtils.randStr(length);
+    }
+
+    @RequestMapping(value = "/jsonview", method = RequestMethod.GET)
+    public Object jsonview(){
+        return "jsonview";
     }
 
 }
